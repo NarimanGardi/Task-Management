@@ -39,7 +39,6 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'backend_access' => 1,
         ])->assignRole($request->role);;
 
         if($request->hasFile('avatar')){

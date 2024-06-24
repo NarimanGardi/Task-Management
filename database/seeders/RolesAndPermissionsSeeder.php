@@ -16,21 +16,22 @@ class RolesAndPermissionsSeeder extends Seeder
      */
     public function run()
     {
-        $admin = Role::create(['name' => 'Admin']);
-        $user = Role::create(['name' => 'Manager']);
+        if (!Role::where('name', 'Admin')->exists()) {
+            $admin = Role::create(['name' => 'Admin', 'guard_name' => 'web']);
+        } else {
+            $admin = Role::where('name', 'Admin')->first();
+        }
 
-        $permissions 
-        = ['manage-role', 'view-role', 'create-role', 'edit-role' , 'delete-role'];
+        $permissions
+            = [
+                'manage-role', 'view-role', 'create-role', 'edit-role', 'delete-role',
+                'manage-user', 'view-user', 'create-user', 'edit-user', 'delete-user',
+            ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::create(['name' => $permission, 'guard_name' => 'web']);
         }
-        Permission::create(['name' => 'manage-user']);
-        Permission::create(['name' => 'view-user']);
-        Permission::create(['name' => 'create-user']);
-        Permission::create(['name' => 'edit-user']);
-        Permission::create(['name' => 'delete-user']);
-        $admin->givePermissionTo(Permission::all());
-        $user->givePermissionTo($permissions);
+
+        $admin->givePermissionTo($permissions);
     }
 }
