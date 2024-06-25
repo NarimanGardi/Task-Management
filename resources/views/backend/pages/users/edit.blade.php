@@ -1,5 +1,5 @@
 @extends('backend.app')
-@section('title', __('Edit Roles'))
+@section('title', __('Edit User'))
 @section('content')
 <div class="page-content">
     <h4 class="fw-bold py-3 mb-4">Account Settings</h4>

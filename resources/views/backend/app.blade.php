@@ -31,6 +31,7 @@
     <!-- End plugin css for this page -->
 
     <!-- inject:css -->
+    <link rel="stylesheet" href="{{ asset('backend/assets/vendors/select2/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/fonts/feather-font/css/iconfont.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/vendors/flag-icon-css/css/flag-icon.min.css') }}">
     <link rel="stylesheet" href="{{ asset('backend/assets/fonts/boxicons.css') }}" />
@@ -78,7 +79,7 @@
     <script src="{{ asset('backend/assets/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('backend/assets/vendors/apexcharts/apexcharts.min.js') }}"></script>
     <script src="{{ asset('backend/assets/vendors/perfect-scrollbar/perfect-scrollbar.js') }}"></script>
-
+    <script src="{{ asset('backend/assets/vendors/select2/select2.min.js') }}"></script>
     <!-- End plugin js for this page -->
 
     <!-- inject:js -->

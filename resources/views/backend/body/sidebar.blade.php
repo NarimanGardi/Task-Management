@@ -18,16 +18,38 @@
                     <span class="link-title">Dashboard</span>
                 </a>
             </li>
+
+            @can('manage-user')
+                <li class="nav-item">
+                    <a href="{{ route('users.index') }}" class="nav-link">
+                        <i class="link-icon" data-feather="user"></i>
+                        <span class="link-title">Users</span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('manage-role')
+                <li class="nav-item">
+                    <a href="{{ route('roles.index') }}" class="nav-link">
+                        <i class="link-icon" data-feather="unlock"></i>
+                        <span class="link-title">Roles & Permissions</span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('manage-group')
+                <li class="nav-item">
+                    <a href="{{ route('groups.index') }}" class="nav-link">
+                        <i class="link-icon" data-feather="users"></i>
+                        <span class="link-title">Groups</span>
+                    </a>
+                </li>
+            @endcan
+
             <li class="nav-item">
-                <a href="{{ route('users.index') }}" class="nav-link">
-                    <i class="link-icon" data-feather="users"></i>
-                    <span class="link-title">Users</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ route('roles.index') }}" class="nav-link">
-                    <i class="link-icon" data-feather="unlock"></i>
-                    <span class="link-title">Roles & Permissions</span>
+                <a href="{{ route('groups.index') }}" class="nav-link">
+                    <i class="link-icon" data-feather="package"></i>
+                    <span class="link-title">Projects</span>
                 </a>
             </li>
         </ul>

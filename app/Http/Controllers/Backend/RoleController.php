@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\CreateRoleRequest;
-use App\Http\Requests\Backend\UpdateRoleRequest;
+use App\Http\Requests\Backend\Role\CreateRoleRequest;
+use App\Http\Requests\Backend\Role\UpdateRoleRequest;
 use Spatie\Permission\Models\Role;
 class RoleController extends Controller
 {

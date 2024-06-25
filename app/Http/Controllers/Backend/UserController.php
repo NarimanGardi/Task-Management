@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Backend\CraeteUserRequest;
-use App\Http\Requests\Backend\UpdateUserRequest;
-use App\Http\Requests\Backend\UserPasswordUpdate;
+use App\Http\Requests\Backend\User\CraeteUserRequest;
+use App\Http\Requests\Backend\User\UpdateUserRequest;
+use App\Http\Requests\Backend\User\UserPasswordUpdate;
 use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\DB;
