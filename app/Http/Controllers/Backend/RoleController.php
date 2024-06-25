@@ -44,13 +44,18 @@ class RoleController extends Controller
     {
             $role->syncPermissions($request->permissions);
             toast()->success('Successed','Role Updated Successfully');
-            return redirect()->route('roles.index');
+            return back();
     }
 
     public function destroy(Role $role)
     {
+        if($role->users->count() > 0){
+            toast()->error('Error','Role Can Not Be Deleted Because It Has Users');
+            return back();
+        }
+
         $role->delete();
         toast()->success('Successed','Role Deleted Successfully');
-        return redirect()->route('roles.index');
+        return back();
     }
 }

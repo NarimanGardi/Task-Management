@@ -22,11 +22,7 @@ class RolesAndPermissionsSeeder extends Seeder
             $admin = Role::where('name', 'Admin')->first();
         }
 
-        $permissions
-            = [
-                'manage-role', 'view-role', 'create-role', 'edit-role', 'delete-role',
-                'manage-user', 'view-user', 'create-user', 'edit-user', 'delete-user',
-            ];
+        $permissions = config('custom.app_permissions');
 
         foreach ($permissions as $permission) {
             Permission::create(['name' => $permission, 'guard_name' => 'web']);
