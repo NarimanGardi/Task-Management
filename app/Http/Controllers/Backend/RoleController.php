@@ -22,7 +22,10 @@ class RoleController extends Controller
 
     public function create()
     {
-        return view('backend.pages.roles.create');
+        $permissions = config('custom.app_permissions');
+
+        $permissionsRows = array_chunk($permissions, 20);
+        return view('backend.pages.roles.create', compact('permissionsRows'));
     }
  
     public function store(CreateRoleRequest $request)
@@ -35,9 +38,10 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        $permissions = $role->permissions()->pluck('name')->toArray();
-        return view('backend.pages.roles.edit', compact('role','permissions'));
-    
+        $permissions = config('custom.app_permissions');
+        $permissionsRows = array_chunk($permissions, 20);
+        $userPermissions = $role->permissions()->pluck('name')->toArray();
+        return view('backend.pages.roles.edit', compact('role','permissionsRows', 'userPermissions'));
     }
 
     public function update(UpdateRoleRequest $request, Role $role)

@@ -23,60 +23,25 @@
                 <div class="card mb-4">
                     <h4 class="p-3">Permissions</h4>
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="mb-4">
-                                    <div class="form-check mb-2">
-                                        <input type="checkbox" name="permissions[]" value="manage-user"
-                                            class="form-check-input" id="manage-user">
-                                        <label class="form-check-label" for="manage-user">Manage User </label>
+                        @foreach ($permissionsRows as $rowPermissions)
+                            <div class="row">
+                                @foreach (array_chunk($rowPermissions, 5) as $columnPermissions)
+                                    <div class="col-md-3">
+                                        @foreach ($columnPermissions as $permission)
+                                            <div class="form-check mb-2">
+                                                <input type="checkbox" name="permissions[]" value="{{ $permission }}"
+                                                    class="form-check-input" id="{{ $permission }}">
+                                                <label class="form-check-label" for="{{ $permission }}">
+                                                    {{ ucwords(str_replace('-', ' ', $permission)) }}
+                                                </label>
+                                            </div>
+                                        @endforeach
                                     </div>
-                                    <div style="margin-left: 30px">
-                                        <div class="form-check mb-2">
-                                            <input type="checkbox" name="permissions[]" value="view-user"
-                                                class="form-check-input" id="read-user">
-                                            <label class="form-check-label" for="read-user">Show User </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input type="checkbox" name="permissions[]" value="create-user"
-                                                class="form-check-input" id="write-user">
-                                            <label class="form-check-label" for="write-user">Add User </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input type="checkbox" name="permissions[]" value="edit-user"
-                                                class="form-check-input" id="edit-user">
-                                            <label class="form-check-label" for="edit-user">Edit User </label>
-                                        </div>
-                                        <div class="form-check mb-2">
-                                            <input type="checkbox" name="permissions[]" value="delete-user"
-                                                class="form-check-input" id="delete-user">
-                                            <label class="form-check-label" for="delete-user">Delete User </label>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
-                            <div class="col-md-3">
-                                <div class="mb-4">
-                                    <div class="form-check mb-2"><input type="checkbox" name="permissions[]"
-                                            value="manage-role" class="form-check-input" id="manage-role"><label
-                                            class="form-check-label" for="manage-role">Manage Roles </label></div>
-                                    <div style="margin-left: 30px">
-                                        <div class="form-check mb-2"><input type="checkbox" name="permissions[]"
-                                                value="read-role" class="form-check-input" id="view-role"><label
-                                                class="form-check-label" for="read-role">Show Role </label></div>
-                                        <div class="form-check mb-2"><input type="checkbox" name="permissions[]"
-                                                value="write-role" class="form-check-input" id="create-role"><label
-                                                class="form-check-label" for="write-role">Add Role </label></div>
-                                        <div class="form-check mb-2"><input type="checkbox" name="permissions[]"
-                                                value="edit-role" class="form-check-input" id="edit-role"><label
-                                                class="form-check-label" for="edit-role">Edit Role </label></div>
-                                        <div class="form-check mb-2"><input type="checkbox" name="permissions[]"
-                                                value="delete-role" class="form-check-input" id="delete-role"><label
-                                                class="form-check-label" for="delete-role">Delete Role </label></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                            <br>
+                        @endforeach
                         <div class="mt-2"><button type="submit" class="btn btn-primary me-2">Submit</button></div>
                     </div>
                 </div>
