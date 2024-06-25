@@ -12,6 +12,12 @@ use App\Http\Requests\Backend\Project\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Project::class, 'project');
+    }
+
     /**
      * Display a listing of the resource.
      */
