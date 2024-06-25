@@ -46,12 +46,14 @@
                 </li>
             @endcan
 
-            <li class="nav-item">
-                <a href="{{ route('groups.index') }}" class="nav-link">
-                    <i class="link-icon" data-feather="package"></i>
-                    <span class="link-title">Projects</span>
-                </a>
-            </li>
+            @can('manage-project')
+                <li class="nav-item">
+                    <a href="{{ route('projects.index') }}" class="nav-link">
+                        <i class="link-icon" data-feather="package"></i>
+                        <span class="link-title">Projects</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </nav>

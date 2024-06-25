@@ -52,4 +52,39 @@ $(function() {
     }
   });
 
+  $(function() {
+    'use strict';
+  
+    if($('#datePickerExample').length) {
+      var date = new Date();
+      $('#datePickerExample').datepicker({
+        format: "yyyy-mm-dd",
+        todayHighlight: false,
+        autoclose: true
+      });
+    }
+  });
+
+  $(function() {
+    'use strict';
+  
+    if($('#datePickerExample1').length) {
+      var date = new Date();
+      // Create a new date object for the first day of the next month
+      var nextMonthDate = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+      $('#datePickerExample1').datepicker({
+        format: "yyyy-mm-dd",
+        todayHighlight: false,
+        autoclose: true
+      });
+    }
+  });
+  $(function() {
+    'use strict';
+  
+    $('#datetimepickerExample').datetimepicker({
+        format: "yyyy-mm-dd",
+    });
+  });
+
 

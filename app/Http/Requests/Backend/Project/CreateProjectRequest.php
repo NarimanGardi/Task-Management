@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Group;
+namespace App\Http\Requests\Backend\Project;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateGroupRequest extends FormRequest
+class CreateProjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,12 @@ class CreateGroupRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|required|unique:groups,name,max:255',
-            'users' => 'array|nullable|exists:users,id',
+            'title' => 'required|string|max:180',
+            'description' => 'nullable|string',
+            'status' => 'required|string',
+            'priority' => 'required|string',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
         ];
     }
 }

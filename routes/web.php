@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\RoleController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\GroupController;
+use App\Http\Controllers\Backend\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,6 @@ Route::post('users/{id}/update/password', [UserController::class , 'updatePasswo
 Route::resource('roles', RoleController::class);
 Route::resource('users', UserController::class);
 Route::resource('groups', GroupController::class);
+Route::resource('projects', ProjectController::class);
 
 require __DIR__.'/auth.php';

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Group\CreateGroupRequest;
-use App\Http\Requests\Group\UpdateGroupRequest;
+use App\Http\Requests\Backend\Group\CreateGroupRequest;
+use App\Http\Requests\Backend\Group\UpdateGroupRequest;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Http\Request;
