@@ -7,10 +7,12 @@
                 <h4 class="mb-3 mb-md-0">Manage Groups</h4>
             </div>
             <div class="d-flex align-items-center flex-wrap text-nowrap">
-                <a href="{{ route('groups.create') }}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
-                    <i class="btn-icon-prepend" data-feather="plus"></i>
-                    Create New Group
-                </a>
+                @can('create-group')
+                    <a href="{{ route('groups.create') }}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+                        <i class="btn-icon-prepend" data-feather="plus"></i>
+                        Create New Group
+                    </a>
+                @endcan
             </div>
         </div>
         <div class="row g-4">
@@ -47,14 +49,19 @@
                                                 <button type="button" class="btn p-0 " data-bs-toggle="dropdown"><i
                                                         class="bx bx-dots-vertical-rounded"></i></button>
                                                 <div class="dropdown-menu">
-                                                    <a class="dropdown-item" href="{{ route('groups.edit', $group->id) }}"><i
-                                                            class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                    <form action="{{ route('groups.destroy', $group->id) }}" method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="dropdown-item show_confirm"><i
-                                                                class="bx bx-trash me-1"></i> Delete</button>
-                                                    </form>
+                                                    @can('edit-group')
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('groups.edit', $group->id) }}"><i
+                                                                class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                    @endcan
+                                                    @can('delete-group')
+                                                        <form action="{{ route('groups.destroy', $group->id) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="dropdown-item show_confirm"><i
+                                                                    class="bx bx-trash me-1"></i> Delete</button>
+                                                        </form>
+                                                    @endcan
                                                 </div>
                                             </div>
                                         </td>
