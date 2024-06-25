@@ -33,16 +33,3 @@
         </ul>
     </div>
 </nav>
-<nav class="settings-sidebar">
-    <div class="sidebar-body">
-        <a href="#" class="settings-sidebar-toggler">
-            <i data-feather="settings"></i>
-        </a>
-        <div class="theme-wrapper">
-            <h6 class="text-muted mb-2">Default Theme:</h6>
-            <a class="theme-item {{ Cache::has('default-theme') ? 'active' : '' }}" href="{{ route('default-theme') }}">
-                <img src="{{ asset('backend/assets/images/screenshots/default.png') }}" alt="light theme">
-            </a>
-        </div>
-    </div>
-</nav>
