@@ -69,6 +69,9 @@
                                                                     class="bx bx-trash me-1"></i> Delete</button>
                                                         </form>
                                                     @endcan
+                                                    <a class="dropdown-item" href="{{ route('projects.tasks', $task->project?->id) }}">
+                                                        <i class="bx bx-sort me-1"></i> Sort Tasks
+                                                    </a>
                                                 </div>
                                             </div>
                                         </td>
