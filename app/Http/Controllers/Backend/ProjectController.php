@@ -23,7 +23,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::latest()->paginate();
+        $projects = Project::with('tasks')->latest()->paginate();
         return view('backend.pages.projects.index', compact('projects'));
     }
 
@@ -85,5 +85,12 @@ class ProjectController extends Controller
         $project->delete();
         toast()->success('Successed', 'Project Deleted Successfully');
         return back();
+    }
+
+    public function projectTasks(Project $project)
+    {
+        $projects = Project::select('id', 'title')->get();
+        $tasks = $project->tasks()->with(['users','groups'])->get();
+        return view('backend.pages.projects.tasks', compact('project', 'tasks', 'projects'));
     }
 }

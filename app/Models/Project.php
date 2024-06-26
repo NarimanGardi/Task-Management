@@ -17,8 +17,8 @@ class Project extends Model
         'end_date' => 'datetime',
     ];
 
-    // public function tasks()
-    // {
-    //     return $this->hasMany(Task::class);
-    // }
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }
