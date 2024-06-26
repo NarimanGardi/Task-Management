@@ -89,7 +89,6 @@ class ProjectController extends Controller
     public function projectTasks(Project $project)
     {
         $projects = Project::select('id', 'title')->get();
-        $tasks = $project->tasks()->with(['users','groups'])->orderBy('sort_order')->get();
-        return view('backend.pages.projects.tasks', compact('project', 'tasks', 'projects'));
+        return view('backend.pages.projects.tasks', compact('project', 'projects'));
     }
 }
