@@ -54,6 +54,15 @@
                     </a>
                 </li>
             @endcan
+
+            @can('manage-task')
+                <li class="nav-item">
+                    <a href="{{ route('tasks.index') }}" class="nav-link">
+                        <i class="link-icon" data-feather="check-square"></i>
+                        <span class="link-title">Tasks</span>
+                    </a>
+                </li>
+            @endcan
         </ul>
     </div>
 </nav>

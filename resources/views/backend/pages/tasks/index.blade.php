@@ -1,25 +1,24 @@
 @extends('backend.app')
-@section('title', __('Manage Project Tasks'))
+@section('title', __('Manage Tasks'))
 @section('content')
     <div class="page-content">
         <div class="d-flex justify-content-between align-items-center flex-wrap grid-margin">
             <div>
-                <h4 class="mb-3 mb-md-0">Manage {{ $project->title }} Tasks</h4>
+                <h4 class="mb-3 mb-md-0">Manage Tasks</h4>
             </div>
             <div class="d-flex align-items-center flex-wrap text-nowrap">
-                <select class="form-select" id="project" name="project" onchange="location = this.value;">
-                    @foreach ($projects as $selectProject)
-                        <option value="{{ route('projects.tasks', $selectProject->id) }}"
-                            {{ $selectProject->id == $project->id ? 'selected' : '' }}>
-                            {{ $selectProject->title }}</option>
-                    @endforeach
-                </select>
+                @can('create-task')
+                    <a href="{{ route('tasks.create') }}" class="btn btn-primary btn-icon-text mb-2 mb-md-0">
+                        <i class="btn-icon-prepend" data-feather="plus"></i>
+                        Create New Task
+                    </a>
+                @endcan
             </div>
         </div>
         <div class="row g-4">
             <div class="col-12">
                 <div class="card">
-                    <h5 class="card-header">Project Task Table</h5>
+                    <h5 class="card-header">Task Table</h5>
                     <div class="table-responsive text-nowrap">
                         <table class="table">
                             <thead>
@@ -38,7 +37,7 @@
                                 @forelse ($tasks as $task)
                                     <tr>
                                         <td><strong>{{ $task->name }}</strong></td>
-                                        <td>{{ $project->title }}</td>
+                                        <td>{{ $task->project?->title }}</td>
                                         <td>{{ $task->start_date->format('d M Y') }}</td>
                                         <td>{{ $task->due_date->format('d M Y') }}</td>
                                         <td> <span class="badge bg-label-primary me-1 "> {{ $task->priority }} </span>
@@ -81,6 +80,9 @@
                                 @endforelse
                             </tbody>
                         </table>
+                    </div>
+                    <div class="m-3">
+                        {{ $tasks->withQueryString()->links() }}
                     </div>
                 </div>
             </div>

@@ -1,22 +1,22 @@
 @extends('backend.app')
-@section('title', __('Create Project'))
+@section('title', __('Create Task'))
 @section('content')
     <!-- Content wrapper -->
     <div class="page-content">
         <div class="container-xxl flex-grow-1 container-p-y">
-            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Create New Project</span></h4>
+            <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Create New task</span></h4>
             <div class="row">
                 <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-body">
                             <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                            <form method="POST" action="{{ route('projects.store') }}">
+                            <form method="POST" action="{{ route('tasks.store') }}">
                                 @csrf
                                 <div class="row">
                                     <div class="mb-3 col-md-12">
-                                        <label for="title" class="form-label">Title</label>
-                                        <input class="form-control" type="text" id="title" name="title" autofocus
-                                            value="{{ old('title') }}" />
+                                        <label for="name" class="form-label">Name</label>
+                                        <input class="form-control" type="text" id="name" name="name" autofocus
+                                            value="{{ old('name') }}" />
                                     </div>
                                 </div>
                                 <div class="row">
@@ -39,23 +39,23 @@
                                     </div>
 
                                     <div class="mb-3 col-md-6">
-                                        <label for="amount" class="form-label">End Date</label>
+                                        <label for="amount" class="form-label">Due Date</label>
                                         <div class="input-group date me-2 mb-2 mb-md-0" id="datePickerExample1">
                                             <span
                                                 class="input-group-text input-group-addon bg-transparent border-primary"><i
                                                     data-feather="calendar" class=" text-primary"></i></span>
                                             <input type="text" class="form-control border-primary bg-transparent"
-                                                name="end_date" value="{{ old('end_date') }}">
+                                                name="due_date" value="{{ old('due_date') }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="mb-3 col-md-6">
-                                        <label for="status" class="form-label">Status</label>
-                                        <select class="form-control" id="status" name="status">
-                                            @foreach ($statuses as $status)
-                                                <option value="{{ $status->value }}">
-                                                    {{ $status->value }}
+                                        <label for="status" class="form-label">Project</label>
+                                        <select class="form-control" id="status" name="project_id">
+                                            @foreach ($projects as $project)
+                                                <option value="{{ $project->id }}">
+                                                    {{ $project->title }}
                                                 </option>
                                             @endforeach
                                         </select>
@@ -67,6 +67,26 @@
                                                 <option value="{{ $priority->value }}">
                                                     {{ $priority->value }}
                                                 </option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="mb-3 col-md-6">
+                                        <label for="users" class="form-label">Assign Users to Task</label>
+                                        <select class="js-example-basic-multiple form-select" id="users" name="users[]"
+                                            multiple="multiple" data-width="100%">
+                                            @foreach ($users as $user)
+                                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="mb-3 col-md-6">
+                                        <label for="groups" class="form-label">Assign Groups to Task</label>
+                                        <select class="js-example-basic-multiple form-select" id="groups" name="groups[]"
+                                            multiple="multiple" data-width="100%">
+                                            @foreach ($groups as $group)
+                                                <option value="{{ $group->id }}">{{ $group->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>

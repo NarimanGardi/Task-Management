@@ -17,21 +17,21 @@
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
-                                    <div class="mb-3 col-md-8">
+                                    <div class="mb-3 col-md-12">
                                         <label for="title" class="form-label">Title</label>
                                         <input class="form-control" type="text" id="title" name="title" autofocus
                                             value="{{ $project->title }}" />
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="mb-3 col-md-8">
+                                    <div class="mb-3 col-md-12">
                                         <label for="description" class="form-label">Description</label>
                                         <textarea class="form-control" id="description" name="description">{{ $project->description }}</textarea>
                                     </div>
                                 </div>
                                 <div class="row">
 
-                                    <div class="mb-3 col-md-4">
+                                    <div class="mb-3 col-md-6">
                                         <label for="start_date" class="form-label">Start Date</label>
                                         <div class="input-group date me-2 mb-2 mb-md-0" id="datePickerExample">
                                             <span
@@ -42,19 +42,19 @@
                                         </div>
                                     </div>
 
-                                    <div class="mb-3 col-md-4">
+                                    <div class="mb-3 col-md-6">
                                         <label for="amount" class="form-label">End Date</label>
                                         <div class="input-group date me-2 mb-2 mb-md-0" id="datePickerExample1">
                                             <span
                                                 class="input-group-text input-group-addon bg-transparent border-primary"><i
                                                     data-feather="calendar" class=" text-primary"></i></span>
                                             <input type="text" class="form-control border-primary bg-transparent"
-                                                name="end_date" value="{{ $project->end_date }}">
+                                                name="end_date" value="{{ $project->end_date->format('Y-m-d') }}">
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="mb-3 col-md-4">
+                                    <div class="mb-3 col-md-6">
                                         <label for="status" class="form-label">Status</label>
                                         <select class="form-control" id="status" name="status">
                                             @foreach ($statuses as $status)
@@ -65,7 +65,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    <div class="mb-3 col-md-4">
+                                    <div class="mb-3 col-md-6">
                                         <label for="priority" class="form-label">Priority</label>
                                         <select class="form-control" id="priority" name="priority">
                                             @foreach ($priorities as $priority)
