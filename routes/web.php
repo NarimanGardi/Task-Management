@@ -29,7 +29,7 @@ Route::resource('groups', GroupController::class);
 Route::get('projects/{project}/tasks', [ProjectController::class, 'projectTasks'])->name('projects.tasks');
 Route::resource('projects', ProjectController::class);
 // route for sorting tasks
-Route::post('tasks/sort', [TaskController::class, 'sort'])->name('tasks.sort');
+// Route::post('tasks/sort', [TaskController::class, 'sort'])->name('tasks.sort');
 Route::resource('tasks', TaskController::class);
 
 require __DIR__.'/auth.php';

@@ -6,14 +6,20 @@ use App\Models\Task;
 use App\Models\User;
 use App\Models\Group;
 use App\Models\Project;
-use Illuminate\Http\Request;
 use App\Enums\TaskPriorityEnum;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\Task\CreateTaskRequest;
 use App\Http\Requests\Backend\Task\UpdateTaskRequest;
+use App\Policies\TaskPolicy;
 
 class TaskController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->authorizeResource(Task::class, 'task');
+    }
+    
     /**
      * Display a listing of the resource.
      */
