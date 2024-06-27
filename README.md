@@ -1,64 +1,127 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Task Management
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## Description
 
-## About Laravel
+Task Management API is a RESTful web service that provides       functionality for managing employee data in an organization. The API supports CRUD (Create, Read, Update, Delete) operations for       employees, as well as authentication and authorization via JSON Web  Tokens (JWTs). Other features include searching for employees by     name, exporting all employee data to a CSV file, importing employee  data from a CSV file, and retrieving logs of actions taken on       employee data. The API is designed to be consumed by client       applications that need to integrate employee management functionality    into their workflow.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Dependencies
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   PHP >= 8.1
+-   Laravel/Framework: ^10.0
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Installation
+* Install PHP and Composer on your local or production server:
+    - PHP Installation: <a href="https://www.php.net/downloads.php">`https://www.php.net/downloads.php`</a>
+    - Composer Installation: <a href="https://getcomposer.org/">`https://getcomposer.org/`</a>
+    
+* Install the dependencies: 
+    ```
+    composer install
+    ```
+    
+* Create a new `.env` file by copying the `.env.example` file: 
+    ```
+    cp .env.example .env
+    ```
+    
+*  Update the `DB_` variables in the `.env` file with your database credentials.
+    
+* Generate a new application key: 
+    ```
+    php artisan key:generate
+    ```
 
-## Learning Laravel
+* Link storage folder to public: 
+    ```
+    php artisan storage:link
+    ```
+    
+*  Migrate the database: 
+    ```
+    php artisan migrate --seed
+    ```
+    
+*  Serve the application: 
+    ```
+    php artisan serve
+    ```
+    
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Deploy Project with Nginx
+*  Set up a server: you can use any cloud service provider such as Amazon Web Services, DigitalOcean, or Google Cloud Platform.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* Create an Elastic Cloud Server (ECS) or Virtual Machine (VM)
+    - Example Specs: 1vCPU, 1GB Memory, 20GB Storage, Linux Ubuntu 24.04 LTS
 
-## Laravel Sponsors
+* Update OS: `sudo apt-get update`
+* Install Nginx. `sudo apt-get install nginx`
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+* Configure Nginx. Open the Nginx configuration file located at `/etc/nginx/sites-available/default` and modify it as follows:
+```php
+server { 
+		listen 80; 
+		root /var/www/html/example.com/public; 
+		
+		index index.html index.htm index.php;
+		
+		location / { 
+			try_files $uri  $uri/ /index.php?$query_string; 
+		}
+		
+		location ~ \.php$ {
+			include fastcgi_params; 
+			fastcgi_pass unix:/var/run/php/php8.1-fpm.sock;
+			fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+			fastcgi_param PATH_INFO $fastcgi_path_info;
+		} 
+}
+```
 
-### Premium Partners
+* Install TLS certificate (Optional):
+```sql
+sudo apt-get install certbot python3-certbot-nginx 
+sudo certbot --nginx -d example.com -d www.example.com
+```
+** please note the DNS should be propagated to example.com (your domain), then can setup TLS certificate.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+* Stop Apache and Restart Nginx:
+```sql
+sudo service apache2 stop
+sudo service nginx start
+```
 
-## Contributing
+* Check nginx status
+```
+sudo nginx -t
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+* Setup PHP
+```
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:ondrej/php
+sudo apt update
 
-## Code of Conduct
+sudo apt install php8.2
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+* Setup PHP Dependencies:
+```
+sudo apt install php8.2-cli php8.2-fpm php8.2-mysql php8.2-xml php8.2-mbstring php8.2-curl php8.2-zip php8.2-gd
 
-## Security Vulnerabilities
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+* Verify PHP Installation
+```
+php -v
+```
 
-## License
+* Install Composer:
+```
+sudo mv composer.phar /usr/local/bin/composer
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+* Place your project folder inside: `/var/www/html/example.com/`
+
+* Do the above #installation section steps.
+
+Your Laravel application is now deployed with Nginx and TLS. You can access it by visiting your domain name in a web browser.
