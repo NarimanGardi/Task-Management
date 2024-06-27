@@ -44,6 +44,12 @@ Task Management Assignment Source Code.
     ```
     php artisan serve
     ```
+
+*  Login credentials: 
+    ```
+    Email : admin@gmail.com
+    Password : password
+    ```
     
 
 ## Deploy Project with Nginx
